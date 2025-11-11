@@ -1,0 +1,315 @@
+@model InsurancePolicyForm.Models.InsuranceDeclarationModel
+@{
+    ViewData["Title"] = "Upload Insurance Declaration";
+}
+
+<div class="main-content">
+    <div class="step-tracker">
+        <div class="step">Property</div>
+        <div class="step">Resident</div>
+        <div class="step">Policy</div>
+        <div class="step active">Upload</div>
+    </div>
+
+    <div class="form-container">
+        <h1 class="page-title">Upload Renters Insurance Declaration Page in order to complete this process</h1>
+        
+        <form asp-action="Upload" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="InsuredAddress" class="control-label"></label>
+                <input asp-for="InsuredAddress" class="form-control" placeholder="Example: 2301 PERFORMANCE DR Apt 101" />
+                <span asp-validation-for="InsuredAddress" class="text-danger"></span>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="EffectiveDate" class="control-label"></label>
+                        <input asp-for="EffectiveDate" class="form-control" />
+                        <span asp-validation-for="EffectiveDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="ExpirationDate" class="control-label"></label>
+                        <input asp-for="ExpirationDate" class="form-control" />
+                        <span asp-validation-for="ExpirationDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="LeaseStartDate" class="control-label"></label>
+                        <input asp-for="LeaseStartDate" class="form-control" />
+                        <span asp-validation-for="LeaseStartDate" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="InsuranceProvider" class="control-label"></label>
+                        <select asp-for="InsuranceProvider" class="form-control">
+                            @foreach (var provider in ViewBag.InsuranceProviders)
+                            {
+                                <option value="@provider">@provider</option>
+                            }
+                        </select>
+                        <span asp-validation-for="InsuranceProvider" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="PolicyNumber" class="control-label"></label>
+                        <input asp-for="PolicyNumber" class="form-control" />
+                        <span asp-validation-for="PolicyNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="LiabilityCoverageAmount" class="control-label"></label>
+                        <input asp-for="LiabilityCoverageAmount" class="form-control" placeholder="$0.00" />
+                        <span asp-validation-for="LiabilityCoverageAmount" class="text-danger"></span>
+                        <small class="text-muted">Minimum Required: $100,000</small>
+                    </div>
+                </div>
+            </div>
+            
+            <h4 class="mt-4 mb-3">Upload Renters Insurance Declaration Page</h4>
+            
+            <div class="upload-container" id="dropZone">
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <div class="upload-text">Drag Files here or Click to choose Files to Upload</div>
+                <input type="file" id="fileInput" class="d-none" accept=".pdf,.gif,.png,.jpg,.jpeg,.tif,.tiff,.bmp,.txt,.doc,.docx" />
+            </div>
+            
+            <div class="file-info">
+                Upload up to 10 of the following file types: .pdf, .gif, .png, .jpg, .jpeg, .tif, .tiff, .bmp, .txt, .doc, .docx
+            </div>
+
+            <!-- Scan Result Display Area -->
+            <div id="scanResultContainer" class="mt-3" style="display: none;">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <i class="fas fa-shield-alt"></i> Security Scan Results
+                        </h5>
+                        <div id="scanStatus" class="badge badge-info">Scanning...</div>
+                    </div>
+                    <div class="card-body">
+                        <div id="scanResult">
+                            <div class="text-center">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="sr-only">Scanning...</span>
+                                </div>
+                                <p class="mt-2">Scanning your document for security threats...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-4">
+                <div class="checkbox-container">
+                    <div class="form-check">
+                        <input asp-for="CertifyAccuracy" class="form-check-input" />
+                        <label asp-for="CertifyAccuracy" class="form-check-label"></label>
+                        <span asp-validation-for="CertifyAccuracy" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                <div class="checkbox-container">
+                    <div class="form-check">
+                        <input asp-for="ConfirmLeaseSigned" class="form-check-input" />
+                        <label asp-for="ConfirmLeaseSigned" class="form-check-label"></label>
+                        <span asp-validation-for="ConfirmLeaseSigned" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                <div class="checkbox-container">
+                    <div class="form-check">
+                        <input asp-for="AddedPoBoxAddress" class="form-check-input" />
+                        <label asp-for="AddedPoBoxAddress" class="form-check-label"></label>
+                        <a href="#" class="po-box-link">PO Box Address</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="buttons-container">
+                <button type="button" class="btn btn-outline-secondary">Back</button>
+                <button type="submit" class="btn btn-primary">Confirm</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const dropZone = document.getElementById('dropZone');
+            const fileInput = document.getElementById('fileInput');
+            const scanResultContainer = document.getElementById('scanResultContainer');
+            const scanResult = document.getElementById('scanResult');
+            const scanStatus = document.getElementById('scanStatus');
+            
+            // Open file dialog when clicking on the drop zone
+            dropZone.addEventListener('click', function () {
+                fileInput.click();
+            });
+            
+            // Handle drag and drop events
+            dropZone.addEventListener('dragover', function (e) {
+                e.preventDefault();
+                dropZone.classList.add('border-primary');
+            });
+            
+            dropZone.addEventListener('dragleave', function () {
+                dropZone.classList.remove('border-primary');
+            });
+            
+            dropZone.addEventListener('drop', function (e) {
+                e.preventDefault();
+                dropZone.classList.remove('border-primary');
+                
+                if (e.dataTransfer.files.length > 0) {
+                    fileInput.files = e.dataTransfer.files;
+                    updateFileList();
+                    scanFile(e.dataTransfer.files[0]);
+                }
+            });
+            
+            // Handle file selection
+            fileInput.addEventListener('change', function() {
+                updateFileList();
+                if (fileInput.files.length > 0) {
+                    scanFile(fileInput.files[0]);
+                }
+            });
+            
+            function updateFileList() {
+                const files = fileInput.files;
+                if (files.length > 0) {
+                    let fileNames = '';
+                    for (let i = 0; i < files.length; i++) {
+                        fileNames += files[i].name + (i < files.length - 1 ? ', ' : '');
+                    }
+                    
+                    // Create file list display
+                    const fileListElement = document.createElement('div');
+                    fileListElement.className = 'mt-3 p-2 bg-light border rounded';
+                    fileListElement.innerHTML = `<strong>Selected files:</strong> ${fileNames}`;
+                    
+                    // Remove previous file list if exists
+                    const prevFileList = document.querySelector('.mt-3.p-2.bg-light.border.rounded');
+                    if (prevFileList) {
+                        prevFileList.remove();
+                    }
+                    
+                    dropZone.insertAdjacentElement('afterend', fileListElement);
+                }
+            }
+
+            async function scanFile(file) {
+                // Show scan result container
+                scanResultContainer.style.display = 'block';
+                scanStatus.className = 'badge badge-info';
+                scanStatus.textContent = 'Scanning...';
+                
+                // Reset scan result to loading state
+                scanResult.innerHTML = `
+                    <div class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Scanning...</span>
+                        </div>
+                        <p class="mt-2">Scanning your document for security threats...</p>
+                    </div>
+                `;
+
+                try {
+                    const formData = new FormData();
+                    formData.append('file', file);
+
+                    const response = await fetch('/Insurance/ScanFile', {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                        }
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        displayScanResult(result.result, result.fileName, true);
+                    } else {
+                        displayScanResult(result.message, file.name, false);
+                    }
+                } catch (error) {
+                    displayScanResult(`Network error: ${error.message}`, file.name, false);
+                }
+            }
+
+            function displayScanResult(result, fileName, isSuccess) {
+                const isClean = result.toLowerCase().includes('clean');
+                const isInfected = result.toLowerCase().includes('infected') || result.toLowerCase().includes('found');
+                
+                let statusClass, statusText, resultClass, icon;
+                
+                if (isSuccess && isClean) {
+                    statusClass = 'badge-success';
+                    statusText = 'Clean';
+                    resultClass = 'alert-success';
+                    icon = 'fas fa-check-circle';
+                } else if (isSuccess && isInfected) {
+                    statusClass = 'badge-danger';
+                    statusText = 'Threat Detected';
+                    resultClass = 'alert-danger';
+                    icon = 'fas fa-exclamation-triangle';
+                } else {
+                    statusClass = 'badge-warning';
+                    statusText = 'Error';
+                    resultClass = 'alert-warning';
+                    icon = 'fas fa-exclamation-circle';
+                }
+
+                scanStatus.className = `badge ${statusClass}`;
+                scanStatus.textContent = statusText;
+
+                scanResult.innerHTML = `
+                    <div class="alert ${resultClass} mb-0">
+                        <div class="d-flex align-items-center">
+                            <i class="${icon} fa-2x mr-3"></i>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1"><strong>File:</strong> ${fileName}</h6>
+                                <p class="mb-0"><strong>Result:</strong> ${result}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        });
+    </script>
+    
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

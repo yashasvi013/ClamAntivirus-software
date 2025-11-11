@@ -1,0 +1,80 @@
+[
+  {
+    "ContainingType": "ClamAVMicroservice.Controllers.ScanController",
+    "Method": "HealthCheck",
+    "RelativePath": "api/Scan/health",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ClamAVMicroservice.Controllers.ScanController",
+    "Method": "ScanFile",
+    "RelativePath": "api/Scan/scan",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "File",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ClamAVMicroservice.Controllers.GenAIController",
+    "Method": "GetGPTResponse",
+    "RelativePath": "getGPTResponse/{prompt}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "prompt",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ClamAVMicroservice.Models.GenAI",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ClamAVMicroservice.Controllers.GenAIController",
+    "Method": "GetVirusInfo",
+    "RelativePath": "getVirusInfo/{virusName}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "virusName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ClamAVMicroservice.Models.GenAI",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]

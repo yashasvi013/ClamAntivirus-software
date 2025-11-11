@@ -1,0 +1,118 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="policy-validator-container">
+    <div class="welcome-section text-center mb-5">
+        <h1 class="welcome-title">Hello, welcome to PolicyValidator!</h1>
+    </div>
+
+    <div class="row policy-info-section">
+        <div class="col-md-6 policy-validation-items">
+            <h3>Items on your policy that will be validated:</h3>
+            <ul class="validation-list">
+                <li>
+                    <i class="fas fa-check-circle text-success me-2"></i>
+                    <span>Interested party address noted on the policy</span>
+                    <i class="fas fa-info-circle text-muted ms-2" data-bs-toggle="tooltip" title="Additional information"></i>
+                </li>
+                <li class="ms-4 text-muted">PO Box 115003 Carrollton, TX 75011</li>
+                <li>
+                    <i class="fas fa-check-circle text-success me-2"></i>
+                    <span>Liability amount meets property requirements</span>
+                    <i class="fas fa-info-circle text-muted ms-2" data-bs-toggle="tooltip" title="Additional information"></i>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle text-success me-2"></i>
+                    <span>Policy starts on or before your move in date</span>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle text-success me-2"></i>
+                    <span>Insured name on the policy matches the name on your lease</span>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle text-success me-2"></i>
+                    <span>Insured location is accurate</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-6">
+            <div class="ready-items-box p-4 bg-light rounded">
+                <h3>Before uploading your policy have these items ready:</h3>
+                
+                <div class="ready-item d-flex align-items-center mt-4">
+                    <div class="ready-item-icon me-3">
+                        <i class="fas fa-hashtag"></i>
+                    </div>
+                    <div>Policy Number</div>
+                </div>
+                
+                <div class="ready-item d-flex align-items-center mt-3">
+                    <div class="ready-item-icon me-3">
+                        <i class="far fa-calendar-alt"></i>
+                    </div>
+                    <div>Policy Effective and End Dates</div>
+                </div>
+                
+                <div class="ready-item d-flex align-items-center mt-3">
+                    <div class="ready-item-icon me-3">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div>Policy / Proof of Insurance Declaration</div>
+                </div>
+                
+                <div class="ready-item d-flex align-items-center mt-3">
+                    <div class="ready-item-icon me-3">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>Primary Policy Holder Name, Birth Date, Email</div>
+                </div>
+                
+                <div class="ready-item d-flex align-items-center mt-3">
+                    <div class="ready-item-icon me-3">
+                        <i class="fas fa-file-signature"></i>
+                    </div>
+                    <div>A signed lease agreement</div>
+                </div>
+                
+                <div class="note-box mt-4">
+                    <strong>Note:</strong> If you don't have all of the items you can still proceed to the next step and we can get you an eSummaPlan policy from your preferred provider.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="action-section row mt-5 position-relative">
+        <div class="col-md-6">
+            <img src="/images/person-walking.svg" alt="Person walking" class="walking-person" />
+        </div>
+        <div class="col-md-6 text-end">
+            <a asp-controller="Insurance" asp-action="Upload" class="btn btn-primary btn-lg get-started-btn">Let's Get Started</a>
+        </div>
+    </div>
+</div>
+
+<footer class="custom-footer mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <span>RealPage, Inc. Richardson, TX 75082</span>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <span>© Copyright 1998-2025. All rights reserved.</span>
+                <a href="#" class="ms-2">Terms of Use</a> | 
+                <a href="#" class="ms-2">Privacy Policy</a> | 
+                <a href="#" class="ms-2">Support</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+@section Scripts {
+    <script>
+        $(function () {
+            $('[data-bs-toggle="tooltip"]').tooltip();
+        });
+    </script>
+}

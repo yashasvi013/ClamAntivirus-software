@@ -1,0 +1,126 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ClamAV + GENAI API",
+    "description": "Combined Microservice with ClamAV and GENAI endpoints",
+    "version": "v1"
+  },
+  "paths": {
+    "/getVirusInfo/{virusName}": {
+      "get": {
+        "tags": [
+          "GenAI"
+        ],
+        "parameters": [
+          {
+            "name": "virusName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenAI"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getGPTResponse/{prompt}": {
+      "get": {
+        "tags": [
+          "GenAI"
+        ],
+        "parameters": [
+          {
+            "name": "prompt",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenAI"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Scan/scan": {
+      "post": {
+        "tags": [
+          "Scan"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "File": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "File": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Scan/health": {
+      "get": {
+        "tags": [
+          "Scan"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "GenAI": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

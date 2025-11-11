@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "WfNxR8pHXbJxZx6qLDam+uFVb+OGYsnspu+qLGpYBSI=",
+  "Source": "ClamAVMicroservice",
+  "BasePath": "_content/ClamAVMicroservice",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

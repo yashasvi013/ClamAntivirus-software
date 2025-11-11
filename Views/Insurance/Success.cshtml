@@ -1,0 +1,27 @@
+@{
+    ViewData["Title"] = "Upload Successful";
+}
+
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8">
+            <div class="card border-success">
+                <div class="card-header bg-success text-white">
+                    <h4 class="m-0">Success!</h4>
+                </div>
+                <div class="card-body text-center py-5">
+                    <div class="mb-4">
+                        <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                    </div>
+                    <h2 class="mb-3">Insurance Declaration Successfully Uploaded</h2>
+                    <p class="lead">Your insurance declaration has been successfully uploaded and is being processed.</p>
+                    <p>A confirmation email will be sent to your registered email address.</p>
+                    
+                    <div class="mt-4 pt-3">
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Return to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
