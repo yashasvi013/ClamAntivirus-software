@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "ClamAVMicroservice.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "..\\MainWebAPI\\MainWebAPI.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
